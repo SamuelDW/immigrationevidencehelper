@@ -1,6 +1,12 @@
 ---
 layout: default
 ---
+<div class="grid-container" id="instructions">
+    <div class="grid-90 prefix-5">
+        <h2>How to use this service</h2>
+    </div>
+</div>
+
 <div class="grid-container" id="skype-upload-form">
     <div class="grid-100">
         <form action="">
@@ -11,18 +17,27 @@ layout: default
 </div>
 
 <div class="grid-container hidden" id="skype-display-table">
-    <table id="skype-table">
-        <thead id="skype-table-head">
-            <tr>
-                <th>Call Date</th>
-                <th>Duration</th>
-                <th>Participants</th>
-                <th>Call Started By</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="grid-50">
+        <form>
+            <button type="button" value="Export PDF" id="export-skype-pdf">Export PDF</button>
+        </form>
+    </div>
+    <div class="grid-100">
+        <table id="skype-table">
+            <thead id="skype-table-head">
+                <tr>
+                    <th>Call Date</th>
+                    <th>Duration</th>
+                    <th>Participants</th>
+                    <th>Call Started By</th>
+                </tr>
+            </thead>
+            <tbody>
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<script src="/assets/js/export_to_pdf.js"></script>
 
