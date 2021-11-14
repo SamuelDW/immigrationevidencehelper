@@ -1,32 +1,13 @@
-/**
- * Declaring Objects
- */
-let callInfo = {
-    whoStartedCall: false,
-    participentOne: false,
-    participentTwo: false,
-    duration: false,
-    timeStarted: false,
-    timeEnded: false,
-    callId: false,
-    callDate: false,
-    callType: false,
-}
-//DURATION IS IN SECONDS
-let callInformationArray = []
-let combinedCallsArray = []
-let missedCalls = []
-
 window.addEventListener('load', function () {
     document.getElementById('tar-upload-input').addEventListener('change',function (e) {
+        let callInformationArray = [],
+            combinedCallsArray = [],
+            missedCalls = [],
+            reader = new FileReader()
 
-        let reader = new FileReader();
         reader.onload = function(event) {
             let skypeJsonObject = JSON.parse(event.target.result),
                 skypeConversation = skypeJsonObject.conversations
-
-            // Get all the events that are calls, discard the rest
-            // And then create the information from this object
 
             const callEvents = getAllCallEvents(skypeConversation)
             callEvents.forEach(call => {
@@ -35,9 +16,7 @@ window.addEventListener('load', function () {
                     callInformationArray.push(callObject)
                 }
             })
-            //after loop organise calls
-            //console.log(callInformationArray, 'after loop')
-            console.time('test')
+
             for (let i = 0; i < callInformationArray.length; i++) {
                 let currentId = callInformationArray[i].callId
                 let result = callInformationArray.filter(o => o.callId === currentId)
@@ -49,6 +28,7 @@ window.addEventListener('load', function () {
                     }
                 }
             }
+
             let distinctCall = {}
             let distinctCalls = combinedCallsArray.filter(function (entry) {
                 if(distinctCall[entry.callId]) {
@@ -57,7 +37,8 @@ window.addEventListener('load', function () {
                 distinctCall[entry.callId] = true
                 return true
             })
-            console.timeEnd('test')
+
+            displayResultsAsTable(distinctCalls)
         }
         reader.readAsText(e.target.files[0]);
     })
