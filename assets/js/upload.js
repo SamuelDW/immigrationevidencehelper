@@ -13,6 +13,9 @@ let callInfo = {
     callType: false,
 }
 //DURATION IS IN SECONDS
+let callInformationArray = []
+let combinedCallsArray = []
+let missedCalls = []
 
 window.addEventListener('load', function () {
     document.getElementById('tar-upload-input').addEventListener('change',function (e) {
@@ -24,22 +27,81 @@ window.addEventListener('load', function () {
 
             // Get all the events that are calls, discard the rest
             // And then create the information from this object
-            console.time('test')
+
             const callEvents = getAllCallEvents(skypeConversation)
-            let callInformationArray = []
             callEvents.forEach(call => {
-                let callObject = createCallInformationObject(call, callInfo)
+                let callObject = createCallInformationObject(call)
                 if (callObject) {
-                    console.log(callObject)
                     callInformationArray.push(callObject)
                 }
             })
-            console.log(callInformationArray)
+            //after loop organise calls
+            //console.log(callInformationArray, 'after loop')
+            console.time('test')
+            for (let i = 0; i < callInformationArray.length; i++) {
+                let currentId = callInformationArray[i].callId
+                let result = callInformationArray.filter(o => o.callId === currentId)
+
+                if (result.length > 1) {
+                    let combinedCall = combineCalls(result)
+                    if (combinedCall) {
+                        combinedCallsArray.push(combinedCall)
+                    }
+                }
+            }
+            let distinctCall = {}
+            let distinctCalls = combinedCallsArray.filter(function (entry) {
+                if(distinctCall[entry.callId]) {
+                   return false
+                }
+                distinctCall[entry.callId] = true
+                return true
+            })
             console.timeEnd('test')
         }
         reader.readAsText(e.target.files[0]);
     })
 })
+
+/**
+ * Combines calls into one object
+ * @param {Array} arrayCalls
+ * @returns object of one call, or an array of missed calls
+ */
+function combineCalls(arrayCalls) {
+    let callStart,
+        endCall
+    let missedCalls = []
+
+    arrayCalls.forEach(el => {
+        if (el.callType === 'ended') {
+            endCall = el
+        }
+        if (el.callType === 'started') {
+            callStart = el
+        }
+        if (el.callType === 'missed') {
+            missedCalls.push(el)
+        }
+    })
+
+    if (missedCalls.length > 0 || !endCall) {
+        return
+    }
+
+    let combinedCall = {}
+
+    combinedCall.timeStarted = callStart.callDate
+    combinedCall.timeEnded = endCall.callDate
+    combinedCall.whoStartedCall = callStart.whoStartedCall
+    combinedCall.duration = endCall.duration
+    combinedCall.participentOne = callStart.participentOne
+    combinedCall.participentTwo = callStart.participentTwo
+    combinedCall.callId = callStart.callId
+    combinedCall.date = callStart.callDate
+
+    return combinedCall
+}
 
 /**
  * Gets all the calls from every conversation
@@ -61,38 +123,30 @@ function getAllCallEvents(conversations) {
 /**
  * Creates the call information object from the Skype Import data
  * @param {Object} call
- * @param {Object} CallInformationObject
  * @returns CallInformationObject with filled data
  */
-function createCallInformationObject(call, CallInformationObject) {
+function createCallInformationObject(call) {
     let parser = new DOMParser(),
         callInformation = parser.parseFromString(call.content, 'text/xml'),
-        callParticipents = callInformation.getElementsByTagName('name'),
-        callIdentifier = callInformation.getElementsByTagName('partlist')[0],
-        callType = callIdentifier.attributes['type'],
-        callDate = new Date(call.originalarrivaltime),
-        callEventId = callIdentifier.attributes['callId'],
-        callDurationArray = callInformation.getElementsByTagName('duration'),
-        callDuration = null
+        callIdentifier = callInformation.getElementsByTagName('partlist')[0]
 
-    if (!callType) {
+    if (!callIdentifier.attributes['type'] || !callIdentifier.attributes['callId']) {
         return
     }
-    if (!callEventId) {
-        return
-    }
-    if (callDurationArray.length !== 0) {
-        callDuration = callDurationArray[0].innerHTML
+
+    // Create the information object and assign values
+    let CallInformationObject = {}
+    if (callInformation.getElementsByTagName('duration').length !== 0) {
+        CallInformationObject.duration = callInformation.getElementsByTagName('duration')[0].innerHTML
     }
 
-    CallInformationObject.callType = callType.value
-    CallInformationObject.callId = callEventId.value
+    CallInformationObject.callId = callIdentifier.attributes['callId'].value
     CallInformationObject.whoStartedCall = call.displayName
-    CallInformationObject.callDate = callDate
-    CallInformationObject.callType = callType.value
-    CallInformationObject.duration = callDuration
+    CallInformationObject.callDate = new Date(call.originalarrivaltime)
+    CallInformationObject.callType = callIdentifier.attributes['type'].value
 
-    callParticipents = getCallParticipents(callParticipents)
+    //Create the call particepents from the call information xml document
+    callParticipents = getCallParticipents(callInformation.getElementsByTagName('name'))
     CallInformationObject.participentOne = callParticipents[0]
     CallInformationObject.participentTwo = callParticipents[1]
 
