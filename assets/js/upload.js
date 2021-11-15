@@ -38,7 +38,7 @@ window.addEventListener('load', function () {
                 return true
             })
 
-            displayResultsAsTable(distinctCalls)
+            displayResultsAsTable(distinctCalls, 'skype-table')
         }
         reader.readAsText(e.target.files[0]);
     })

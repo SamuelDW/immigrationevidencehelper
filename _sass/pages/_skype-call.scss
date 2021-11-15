@@ -1,0 +1,19 @@
+#skype-table {
+    border: 2px solid #0995E1;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr {
+    text-align: center;
+    border-bottom: 1px solid #0995E1;
+
+    &:nth-child(even) {
+        background-color: pink;
+    }
+}
+
+th {
+    background-color: #0995E1;
+}
+
