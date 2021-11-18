@@ -3,6 +3,7 @@ window.addEventListener('load', function () {
         let callInformationArray = [],
             combinedCallsArray = [],
             missedCalls = [],
+            contacts = []
             reader = new FileReader()
 
         reader.onload = function(event) {
@@ -13,6 +14,7 @@ window.addEventListener('load', function () {
             callEvents.forEach(call => {
                 let callObject = createCallInformationObject(call)
                 if (callObject) {
+                    contacts = createContactList(contacts, callObject)
                     callInformationArray.push(callObject)
                 }
             })
@@ -28,21 +30,49 @@ window.addEventListener('load', function () {
                     }
                 }
             }
-
-            let distinctCall = {}
-            let distinctCalls = combinedCallsArray.filter(function (entry) {
-                if(distinctCall[entry.callId]) {
-                   return false
-                }
-                distinctCall[entry.callId] = true
-                return true
-            })
+            let distinctCalls = getUniqueCalls(combinedCallsArray)
 
             displayResultsAsTable(distinctCalls, 'skype-table')
+            populateCallRemoval(contacts, 'select-remove')
         }
         reader.readAsText(e.target.files[0]);
     })
 })
+
+/**
+ * Creates contact list from unique contacts in calls
+ * @param {Array} contactListArray
+ * @param {Object} callObject
+ * @returns
+ */
+function createContactList(contactListArray, callObject) {
+     if (contactListArray.indexOf(callObject.participentOne) === -1) {
+        contactListArray.push(callObject.participentOne)
+    }
+    if (contactListArray.indexOf(callObject.participentTwo) === -1) {
+        contactListArray.push(callObject.participentTwo)
+    }
+
+    return contactListArray
+}
+
+/**
+ * Fetches Unique calls in array
+ * @param {Array} arrayOfCalls
+ * @returns
+ */
+function getUniqueCalls(arrayOfCalls) {
+    let distinctCall = {}
+    let distinctCalls = arrayOfCalls.filter(function (entry) {
+        if (distinctCall[entry.callId]) {
+            return false
+        }
+        distinctCall[entry.callId] = true
+        return true
+    })
+
+    return distinctCalls
+}
 
 /**
  * Combines calls into one object
