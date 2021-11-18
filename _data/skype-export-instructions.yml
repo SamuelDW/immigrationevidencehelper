@@ -1,0 +1,18 @@
+- step: One
+  description: Navigate to LINK, which you will need to sign in, and then click on the type of export. Please select only the option WHICH ONE
+
+- step: Two
+  description: Download the generated TAR file. This is simply a zipped folder, extract the file most likely called messages.json which is the file you will need.
+
+- step: Three
+  description: Using this page, upload messages.json using the field provided. This will generate a table full of calls with two people in.
+
+- step: Four
+  description: Using the form above the table, modify the table until you are ready to export the table to PDF.
+
+- step: Five
+  description: Click the export PDF button, which should generate a file for you to download.
+
+- step: Six
+  description: We hope that you find this tool, and any of the other tools available useful. If you feel like giving, please follow the link to <a href="">our Patreon Page</a>
+

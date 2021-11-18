@@ -1,0 +1,11 @@
+- name: Terms & Conditions
+  icon: <i class="fas fa-file-contract"></i>
+
+- name: Privacy Policy
+  icon: <i class="fas fa-scroll"></i>
+
+- name: Cookie Policy
+  icon: <i class="fas fa-cookie-bite"></i>
+
+- name: Contact Us
+  icon: <i class="fas fa-inbox"></i>

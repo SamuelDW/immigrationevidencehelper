@@ -1,0 +1,19 @@
+- name: Version
+  value: 0.0.1
+  icon: <i class="fas fa-code-branch"></i>
+
+- name: Hosted On
+  value: Github Pages
+  icon: <i class="fab fa-github-square" style="color:white;"></i>
+
+- name: Built On
+  value: Jekyll
+  icon: <i class="fas fa-vial" style="color:red;"></i>
+
+- name: Created By
+  value: Walker Development Studios
+  icon: <i class="fas fa-terminal" style="color:green;"></i>
+
+# - name: UKVI Immigration Helper
+#   value: ~
+#   icon: <i class="fas fa-hands-helping"></i>
