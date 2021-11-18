@@ -34,6 +34,7 @@ window.addEventListener('load', function () {
 
             displayResultsAsTable(distinctCalls, 'skype-table')
             populateCallRemoval(contacts, 'select-remove')
+            populateCallRemoval(contacts, 'name-being-changed-select')
         }
         reader.readAsText(e.target.files[0]);
     })

@@ -29,24 +29,49 @@ title: Skype File Converter
 </div>
 
 <div class="grid-container" id="skype-display-table">
-    <div class="grid-90 prefix-5">
-        <h3>Table Modifiers</h3>
+    <div class="grid-90 prefix-5 grid-parent">
+        <div class="grid-100">
+            <h3>Table Modifiers</h3>
+        </div>
         <form>
-            <label for="namechanger">Change Name</label>
-            <input type="text" placeholder="Name to convert" name="namechanger" id="name-changer">
+            <div class="grid-33">
+                <label for="changename">Change Contact Name:</label>
+                <select name="changename" id="name-being-changed-select">
+                    <option disabled selected>Contact To Change Name</option>
+                </select>
 
-            <label for="removename">Remove Calls Containing Person:</label>
-            <select name="removename" id="select-remove">
-                <option disabled selected>Remove Calls Containing Contact</option>
-            </select><br>
+                <label for="namewantedvalue">Name:</label>
+                <input type="text" placeholder="Replace name with:" name="namewantedvalue" id="name-desired-input">
 
-            <label for="year-select">Select Specific Year</label>
-            <input type="number" min="2003" max="2099" step="1" value="2021" name="year-select">
+                <button value="Replace" type="button" id="replace-button">Replace</button>
+            </div>
 
-            <label for="completed-modifiers">Completed Edits</label>
-            <input type="checkbox" name="completed-modifiers">
+            <div class="grid-33">
+                <label for="removename">Remove Calls Containing Person:</label>
+                <select name="removename" id="select-remove">
+                    <option disabled selected>Remove Calls Containing Contact</option>
+                </select>
+            </div>
+
+            <div class="grid-33">
+                <label for="year-select">Select Specific Year</label>
+                <input type="number" min="2003" max="2099" step="1" value="2021" name="year-select" id="year-selector">
+            </div>
+            <div class="clear"></div>
+
+            <div class="grid-33">
+                <label for="completed-modifiers">Completed Edits?</label>
+                <input type="checkbox" name="completed-modifiers">
+            </div>
+            <div class="grid-33">
+                <label for="reset-table">Reset</label>
+                <button name="reset-table" value="Reset" type="button"><i class="fas fa-undo"></i></button>
+            </div>
+            <div class="grid-33">
+                <label for="export">Export to PDF</label>
+                <button type="button" value="Export PDF" id="export-skype-pdf" name="export">Export PDF</button>
+            </div>
         </form>
-        <button type="button" value="Export PDF" id="export-skype-pdf">Export PDF</button>
     </div>
     <div class="grid-90 prefix-5 mobile-grid-90">
         <table id="skype-table">

@@ -6,7 +6,7 @@ function displayResultsAsTable(callArray, table) {
     callArray.forEach(call => {
         let row = '<tr><td>' + call.date.toLocaleDateString('en-GB') + '</td>'
             + '<td class="'+ SKYPE_CALL_DURATION +'">' + secondsToHms(call.duration) + '</td>'
-            + '<td style="display:inline-grid;">' + '<span>' + call.participentOne + '</span><span> ' + call.participentTwo + '</span></td>'
+            + '<td style="display:inline-grid;">' + '<span>' + call.participentOne + '</span><span>' + call.participentTwo + '</span></td>'
             + '<td>' + call.whoStartedCall + '</td></tr>'
 
         let newRow = tableBody.insertRow(tableBody.rows.length)
