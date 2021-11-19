@@ -38,3 +38,8 @@ function populateCallRemoval(contactList, selectBox) {
         removeBox.appendChild(optionRow)
     })
 }
+
+function populateHiddenField(array, fieldId) {
+    let hiddenElement = document.getElementById(fieldId)
+    hiddenElement.value = array
+}

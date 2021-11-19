@@ -1,9 +1,8 @@
 window.addEventListener('load', function () {
+    let contacts = []
     document.getElementById('tar-upload-input').addEventListener('change',function (e) {
         let callInformationArray = [],
             combinedCallsArray = [],
-            missedCalls = [],
-            contacts = []
             reader = new FileReader()
 
         reader.onload = function(event) {
@@ -35,6 +34,7 @@ window.addEventListener('load', function () {
             displayResultsAsTable(distinctCalls, 'skype-table')
             populateCallRemoval(contacts, 'select-remove')
             populateCallRemoval(contacts, 'name-being-changed-select')
+            populateHiddenField(contacts, 'contacts-hidden')
         }
         reader.readAsText(e.target.files[0]);
     })

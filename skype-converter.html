@@ -47,14 +47,14 @@ title: Skype File Converter
             </div>
 
             <div class="grid-33">
-                <label for="removename">Remove Calls Containing Person:</label>
+                <label for="removename">Remove Calls Started By:</label>
                 <select name="removename" id="select-remove">
                     <option disabled selected>Remove Calls Containing Contact</option>
                 </select>
             </div>
 
             <div class="grid-33">
-                <label for="year-select">Select Specific Year</label>
+                <label for="year-select">Remove Specific Year</label>
                 <input type="number" min="2003" max="2099" step="1" value="2021" name="year-select" id="year-selector">
             </div>
             <div class="clear"></div>
@@ -65,7 +65,7 @@ title: Skype File Converter
             </div>
             <div class="grid-33">
                 <label for="reset-table">Reset</label>
-                <button name="reset-table" value="Reset" type="button"><i class="fas fa-undo"></i></button>
+                <button name="reset-table" value="Reset" type="button" id="reset-table"><i class="fas fa-undo"></i></button>
             </div>
             <div class="grid-33">
                 <label for="export">Export to PDF</label>
@@ -74,6 +74,7 @@ title: Skype File Converter
         </form>
     </div>
     <div class="grid-90 prefix-5 mobile-grid-90">
+        <div id="contacts-hidden"></div>
         <table id="skype-table">
             <thead id="skype-table-head">
                 <tr>
@@ -114,4 +115,3 @@ document.getElementById('export-skype-pdf').addEventListener('click', function (
     doc.save(fileName)
 })
 </script>
-
