@@ -1,6 +1,16 @@
 window.addEventListener('load', function () {
     let contacts = []
     document.getElementById('tar-upload-input').addEventListener('change',function (e) {
+        let table = document.getElementById('skype-table'),
+            tbody = table.getElementsByTagName('tbody')[0]
+
+        // Clear table if file already uploaded
+        if (tbody.rows.length > 0) {
+            for (let i = tbody.rows.length; i > 0; i--) {
+                tbody.deleteRow(tbody.rows[i])
+            }
+        }
+
         let callInformationArray = [],
             combinedCallsArray = [],
             reader = new FileReader()
