@@ -45,6 +45,7 @@ window.addEventListener('load', function () {
             populateCallRemoval(contacts, 'select-remove')
             populateCallRemoval(contacts, 'name-being-changed-select')
             populateHiddenField(contacts, 'contacts-hidden')
+            document.querySelector('#skype-display-table').classList.remove('hidden')
         }
         reader.readAsText(e.target.files[0]);
     })

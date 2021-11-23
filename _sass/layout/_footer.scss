@@ -3,6 +3,14 @@ footer {
     margin: 0;
     padding: 0;
     margin-top: 5%;
+    position: relative;
+    left: 0;
+    bottom: 0;
+
+    .footer-link-header {
+        margin-bottom: 0;
+        border-bottom: 1px solid white;
+    }
 
     #footer-header,
     #footer-footer {
@@ -16,6 +24,10 @@ footer {
 
     .footer-links-item {
         display: block ruby;
+
+        .footer-link-name {
+            color: white;
+        }
     }
 
     #footer-links-container {

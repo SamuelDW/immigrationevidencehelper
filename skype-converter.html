@@ -11,14 +11,10 @@ title: Skype File Converter
             {% endfor%}
         </ol>
     </div>
-    <div class="grid-90 prefix-5 mobile-grid-90 mobile-prefix-5">
-        <h2>Terms of Service</h2>
-        <p>We are not linked to, associated with or hold any relations with Skype.</p>
-    </div>
 </div>
 
 <div class="grid-container" id="skype-upload-form">
-    <div class="grid-100 mobile-grid-100">
+    <div class="grid-30 prefix-35 mobile-grid-100">
         <form action="">
             <div class="file-wrap mobile-grid-80">
                 <label for="filename" id="new-button">Upload Export File (JSON)  <i class="fas fa-upload"></i></label>
@@ -28,13 +24,13 @@ title: Skype File Converter
     </div>
 </div>
 
-<div class="grid-container" id="skype-display-table">
+<div class="grid-container hidden" id="skype-display-table">
     <div class="grid-90 prefix-5 grid-parent">
         <div class="grid-100">
             <h3>Table Modifiers</h3>
         </div>
         <form>
-            <div class="grid-33">
+            <div class="grid-33 grid-parent">
                 <label for="changename">Change Contact Name:</label>
                 <select name="changename" id="name-being-changed-select">
                     <option disabled selected>Contact To Change Name</option>
@@ -43,7 +39,9 @@ title: Skype File Converter
                 <label for="namewantedvalue">Name:</label>
                 <input type="text" placeholder="Replace name with:" name="namewantedvalue" id="name-desired-input">
 
-                <button value="Replace" type="button" id="replace-button">Replace</button>
+                <div class="grid-50 prefix-25" id="replace-name-button">
+                    <button value="Replace" type="button" id="replace-button">Replace Name</button>
+                </div>
             </div>
 
             <div class="grid-33">
@@ -73,6 +71,7 @@ title: Skype File Converter
             </div>
         </form>
     </div>
+
     <div class="grid-90 prefix-5 mobile-grid-90">
         <div id="contacts-hidden"></div>
         <table id="skype-table">
@@ -97,20 +96,25 @@ title: Skype File Converter
 <script src="https://unpkg.com/jspdf-autotable@3.5.22/dist/jspdf.plugin.autotable.js"></script>
 <script>
 document.getElementById('export-skype-pdf').addEventListener('click', function () {
-    let skypeExport = document.getElementById('skype-table'),
-        date = new Date(),
+    let date = new Date(),
         dd = String(date.getDate()).padStart(2, '0'),
         mm = String(date.getMonth() + 1).padStart(2, '0'),
         yyyy = date.getFullYear(),
         fileName = 'skype_export_' + dd + mm + yyyy + '.pdf'
 
-    const doc = new jsPDF()
+    const doc = new jsPDF(),
+        header = function (data) {
+            doc.text('UKVI Immigration Evidence Support', data.settings.margin.left, 20)
+        }
 
     doc.autoTable({
         html: '#skype-table',
         theme: 'grid',
         useCss: true,
-        pageBreak: 'auto'
+        pageBreak: 'auto',
+        didDrawPage: header,
+        margin: {top: 30},
+       // startY: 300,
     })
     doc.save(fileName)
 })

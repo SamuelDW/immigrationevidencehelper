@@ -1,3 +1,17 @@
 header {
     background-color: #161B22;
 }
+
+nav {
+    display: flex;
+    text-align: center;
+    height: 100%;
+    vertical-align: auto;
+    padding-top: 4%;
+
+    a {
+        text-decoration: none;
+        color: white;
+        font-size: 1.1rem;
+    }
+}
