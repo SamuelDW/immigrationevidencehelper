@@ -7,7 +7,8 @@ function displayResultsAsTable(callArray, table) {
         let row = '<tr><td>' + call.date.toLocaleDateString('en-GB') + '</td>'
             + '<td class="'+ SKYPE_CALL_DURATION +'">' + secondsToHms(call.duration) + '</td>'
             + '<td style="display:inline-grid;">' + '<span>' + call.participentOne + '</span><br><span>' + call.participentTwo + '</span></td>'
-            + '<td>' + call.whoStartedCall + '</td></tr>'
+            + '<td>' + call.whoStartedCall + '</td>'
+            + '<td>' + '<input type="checkbox" class="table-remove-row-checkbox">' + '</td></tr>'
 
         let newRow = tableBody.insertRow(tableBody.rows.length)
         newRow.innerHTML = row
