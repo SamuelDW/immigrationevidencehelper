@@ -57,17 +57,21 @@ title: Skype File Converter
             </div>
             <div class="clear"></div>
 
-            <div class="grid-33">
+            <div class="grid-25">
                 <label for="completed-modifiers">Completed Edits?</label>
                 <input type="checkbox" name="completed-modifiers">
             </div>
-            <div class="grid-33">
+            <div class="grid-25">
                 <label for="reset-table">Reset</label>
                 <button name="reset-table" value="Reset" type="button" id="reset-table"><i class="fas fa-undo"></i></button>
             </div>
-            <div class="grid-33">
+            <div class="grid-25">
                 <label for="export">Export to PDF</label>
                 <button type="button" value="Export PDF" id="export-skype-pdf" name="export">Export PDF</button>
+            </div>
+            <div class="grid-25">
+                <label for="intro">Introduction</label>
+                <button type="button" value="Download Introduction" name="intro" id="download-intro">Download Intro</button>
             </div>
         </form>
     </div>
@@ -92,7 +96,8 @@ title: Skype File Converter
 </div>
 <script src="/assets/js/upload.js"></script>
 <script src="/assets/js/display_results.js"></script>
-<script src="assets/js/filter_results.js"></script>
+<script src="/assets/js/filter_results.js"></script>
+<script src="/assets/js/introduction.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 <script src="https://unpkg.com/jspdf-autotable@3.5.22/dist/jspdf.plugin.autotable.js"></script>
 <script>
@@ -120,3 +125,6 @@ document.getElementById('export-skype-pdf').addEventListener('click', function (
     doc.save(fileName)
 })
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.4/pdfmake.min.js" integrity="sha512-vCaf5rysVLu1/zVMefJew+IjqlQibggltPWqeo96XsdyJ4ihR3eEDV1oU60afiRXTGf8DqKUjLs2Q99HCbnjAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>

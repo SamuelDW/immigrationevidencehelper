@@ -1,14 +1,14 @@
-let nameBeingChangedInput = document.getElementById('name-being-changed-select'),
-    table = document.getElementById('skype-table'),
-    removeSelectBox = document.getElementById('select-remove'),
-    nameReplacingInput = document.getElementById('name-desired-input')
-    replaceButton = document.getElementById('replace-button'),
-    yearSelector = document.getElementById('year-selector'),
-    resetTableButton = document.getElementById('reset-table'),
+let nameBeingChangedInput = document.querySelector('#name-being-changed-select'),
+    table = document.querySelector('#skype-table'),
+    removeSelectBox = document.querySelector('#select-remove'),
+    nameReplacingInput = document.querySelector('#name-desired-input')
+    replaceButton = document.querySelector('#replace-button'),
+    yearSelector = document.querySelector('#year-selector'),
+    resetTableButton = document.querySelector('#reset-table'),
     originalContacts = [],
     newContacts = [],
     changingContacts = [],
-    selectBoxesContacts = [nameBeingChangedInput, removeSelectBox]
+    selectBoxesContacts = [nameBeingChangedInput, removeSelectBox],
 
 removeSelectBox.addEventListener('change', function () {
     removeCallsByPerson(table, removeSelectBox.value, 3)
