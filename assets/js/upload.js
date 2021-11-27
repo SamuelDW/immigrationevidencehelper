@@ -46,6 +46,15 @@ window.addEventListener('load', function () {
             populateCallRemoval(contacts, 'name-being-changed-select')
             populateHiddenField(contacts, 'contacts-hidden')
             document.querySelector('#skype-display-table').classList.remove('hidden')
+            let removeCheckboxes = document.querySelectorAll('.table-remove-row-checkbox')
+
+            removeCheckboxes.forEach(element => {
+                element.addEventListener('click', function () {
+                    if (element.checked === true) {
+                        element.parentElement.parentElement.classList.toggle('hidden')
+                    }
+                })
+            })
         }
         reader.readAsText(e.target.files[0]);
     })

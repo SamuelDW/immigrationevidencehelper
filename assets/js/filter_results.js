@@ -172,6 +172,11 @@ function resetSelectBoxes(arraySelectBoxElements, hiddenField) {
 function resetTable (table) {
     let tablebody = table.lastElementChild
 
+    let removeCheckboxes= document.querySelectorAll('.table-remove-row-checkbox')
+    removeCheckboxes.forEach(element => {
+        element.checked = false
+    })
+
     for (let i = 0; i < tablebody.rows.length; i++) {
         if (tablebody.rows[i].classList.contains('hidden')) {
             tablebody.rows[i].classList.remove('hidden')
