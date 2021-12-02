@@ -1,15 +1,15 @@
 - name: UKVI Home
-  link: /
+  link: samueldw.github.io/immigrationevidencehelper/
   icon: <i class="fas fa-home"></i>
 
 - name: Skype Parser
-  link: /skype-converter
+  link: samueldw.github.io/immigrationevidencehelper/skype-converter
   icon: <i class="fab fa-skype"></i>
 
 - name: WhatsApp Parser
-  link: /whatsapp-converter
+  link: samueldw.github.io/immigrationevidencehelper/whatsapp-converter
   icon: <i class="fab fa-whatsapp"></i>
 
 - name: Messenger Parser
-  link: /messenger-converter
+  link: samueldw.github.io/immigrationevidencehelper/messenger-converter
   icon: <i class="fab fa-facebook-messenger"></i>

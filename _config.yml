@@ -18,12 +18,12 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Skype Conversation Parser
+title: UKVI Immigration Heloer
 email: samueldurw@outlook.com
 description: >- # this means to ignore newlines until "baseurl:"
   Convert your file into something readable by a human
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "https://samueldw.github.io/" # the subpath of your site, e.g. /blog
+url: "immigrationevidencehelper/" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: SamuelDW
 github_username:  samueldw
 
