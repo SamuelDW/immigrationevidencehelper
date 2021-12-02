@@ -1,0 +1,57 @@
+<footer>
+    <div class="grid-container">
+        <div class="grid-100 mobile-grid-100" id="footer-header">
+            <h4>{{ page.title }}</h4>
+        </div>
+
+        <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent" id="footer-links-container">
+            <!-- Site Navigation Column -->
+            <div class="grid-33 mobile-grid-100 grid-parent">
+                <div class="grid-90 prefix-5 footer-link-header" style="text-align: center;">
+                    <h4>Site Map</h4>
+                </div>
+                <div class="footer-links">
+                    {% for  page in site.data.site-links %}
+                        <div class="grid-100 mobile-grid-100 footer-links-item">
+                            <p><a href="{{page.link}}">{{page.name}}</a></p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- Site Legal -->
+            <div class="grid-33 mobile-grid-100 grid-parent">
+                <div class="grid-90 prefix-5 footer-link-header" style="text-align: center;">
+                    <h4>Legal</h4>
+                </div>
+                <div class="footer-links">
+                    {% for legal in site.data.site-legal %}
+                        <div class="grid-100 mobile-grid-100 footer-links-item">
+                            <p>{{legal.name}} {{legal.icon}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- Site Information Column -->
+            <div class="grid-33 mobile-grid-100 grid-parent">
+                <div class="grid-90 prefix-5 footer-link-header" style="text-align: center;">
+                    <h4>Site Information</h4>
+                </div>
+                <div class="footer-links">
+                    {% for info in site.data.site-information %}
+                        <div class="grid-100 mobile-grid-100 footer-links-item">
+                            <p class="footer-link-name">{{info.name}}:</p>
+                            <p>{{info.value}} {{info.icon}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="grid-100 mobile-grid-100" id="footer-footer">
+            <h4>UKVI Immigration Evidence</h4>
+            <p>{{ 'now' | date: "%Y" }} <i class="far fa-copyright"></i></p>
+            <p><i>UKVI Immigration Evidence is not affiliated by any company that we provide
+                support for. UKVI Immigration Evidence is not liable for refusal of visas.
+            </i></p>
+        </div>
+    </div>
+</footer>

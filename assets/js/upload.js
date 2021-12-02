@@ -1,8 +1,18 @@
 window.addEventListener('load', function () {
+    let contacts = []
     document.getElementById('tar-upload-input').addEventListener('change',function (e) {
+        let table = document.getElementById('skype-table'),
+            tbody = table.getElementsByTagName('tbody')[0]
+
+        // Clear table if file already uploaded
+        if (tbody.rows.length > 0) {
+            for (let i = tbody.rows.length; i > 0; i--) {
+                tbody.deleteRow(tbody.rows[i])
+            }
+        }
+
         let callInformationArray = [],
             combinedCallsArray = [],
-            missedCalls = [],
             reader = new FileReader()
 
         reader.onload = function(event) {
@@ -13,6 +23,7 @@ window.addEventListener('load', function () {
             callEvents.forEach(call => {
                 let callObject = createCallInformationObject(call)
                 if (callObject) {
+                    contacts = createContactList(contacts, callObject)
                     callInformationArray.push(callObject)
                 }
             })
@@ -28,21 +39,61 @@ window.addEventListener('load', function () {
                     }
                 }
             }
-
-            let distinctCall = {}
-            let distinctCalls = combinedCallsArray.filter(function (entry) {
-                if(distinctCall[entry.callId]) {
-                   return false
-                }
-                distinctCall[entry.callId] = true
-                return true
-            })
+            let distinctCalls = getUniqueCalls(combinedCallsArray)
 
             displayResultsAsTable(distinctCalls, 'skype-table')
+            populateCallRemoval(contacts, 'select-remove')
+            populateCallRemoval(contacts, 'name-being-changed-select')
+            populateHiddenField(contacts, 'contacts-hidden')
+            document.querySelector('#skype-display-table').classList.remove('hidden')
+            let removeCheckboxes = document.querySelectorAll('.table-remove-row-checkbox')
+
+            removeCheckboxes.forEach(element => {
+                element.addEventListener('click', function () {
+                    if (element.checked === true) {
+                        element.parentElement.parentElement.classList.toggle('hidden')
+                    }
+                })
+            })
         }
         reader.readAsText(e.target.files[0]);
     })
 })
+
+/**
+ * Creates contact list from unique contacts in calls
+ * @param {Array} contactListArray
+ * @param {Object} callObject
+ * @returns
+ */
+function createContactList(contactListArray, callObject) {
+     if (contactListArray.indexOf(callObject.participentOne) === -1) {
+        contactListArray.push(callObject.participentOne)
+    }
+    if (contactListArray.indexOf(callObject.participentTwo) === -1) {
+        contactListArray.push(callObject.participentTwo)
+    }
+
+    return contactListArray
+}
+
+/**
+ * Fetches Unique calls in array
+ * @param {Array} arrayOfCalls
+ * @returns
+ */
+function getUniqueCalls(arrayOfCalls) {
+    let distinctCall = {}
+    let distinctCalls = arrayOfCalls.filter(function (entry) {
+        if (distinctCall[entry.callId]) {
+            return false
+        }
+        distinctCall[entry.callId] = true
+        return true
+    })
+
+    return distinctCalls
+}
 
 /**
  * Combines calls into one object

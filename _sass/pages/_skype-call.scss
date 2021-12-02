@@ -1,19 +1,46 @@
 #skype-table {
-    border: 2px solid #0995E1;
+    border: 1px solid white;
     width: 100%;
     border-collapse: collapse;
+    margin-top: 2%;
+}
+
+#replace-name-button {
+    text-align: center;
+}
+
+.form-buttons {
+    text-align: center;
+    display: grid;
 }
 
 tr {
     text-align: center;
-    border-bottom: 1px solid #0995E1;
+    border-bottom: 1px solid white;
+    text-transform: capitalize;
 
     &:nth-child(even) {
-        background-color: pink;
+        background-color: #30363D;
     }
 }
 
 th {
-    background-color: #0995E1;
+    background-color: #30363D;
 }
 
+body {
+    background-color: #0D1117;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.file-wrap {
+    font-size: 1.5rem;
+
+    i {
+        color: red;
+    }
+}

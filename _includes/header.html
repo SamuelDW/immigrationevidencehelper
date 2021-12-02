@@ -1,7 +1,15 @@
 <header>
     <div class="grid-container">
-        <div class="grid-50">
-            <h1>Skype Conversation Parser</h1>
+        <div class="grid-50 grid-parent">
+            <div class="grid-25" id="header-logo">
+                <img src="/assets/images/ukvi-immigration-support-logo.png">
+            </div>
+            <div class="grid-75">
+                <h1>{{page.title}}</h1>
+            </div>
+        </div>
+        <div class="grid-50 grid-parent">
+            {% include navigation.html %}
         </div>
     </div>
 </header>

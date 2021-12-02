@@ -1,0 +1,126 @@
+---
+layout: default
+title: Skype File Converter
+---
+<div class="grid-container" id="instructions">
+    <div class="grid-90 prefix-5 mobile-grid-90 mobile-prefix-5">
+        <h2>How to use this service</h2>
+        <ol>
+            {%for step in site.data.skype-export-instructions %}
+                <li>{{step.description}}</li>
+            {% endfor%}
+        </ol>
+    </div>
+</div>
+
+<div class="grid-container" id="skype-upload-form">
+    <div class="grid-30 prefix-35 mobile-grid-100">
+        <form action="">
+            <div class="file-wrap mobile-grid-80">
+                <label for="filename" id="new-button">Upload Export File (JSON)  <i class="fas fa-upload"></i></label>
+                <input type="file" id="tar-upload-input" name="filename" accept="application/json">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="grid-container hidden" id="skype-display-table">
+    <div class="grid-90 prefix-5 grid-parent">
+        <div class="grid-100">
+            <h3>Table Modifiers</h3>
+        </div>
+        <form>
+            <div class="grid-33 grid-parent">
+                <label for="changename">Change Contact Name:</label>
+                <select name="changename" id="name-being-changed-select">
+                    <option disabled selected>Contact To Change Name</option>
+                </select>
+
+                <label for="namewantedvalue">Name:</label>
+                <input type="text" placeholder="Replace name with:" name="namewantedvalue" id="name-desired-input">
+
+                <div class="grid-50 prefix-25" id="replace-name-button">
+                    <button value="Replace" type="button" id="replace-button">Replace Name</button>
+                </div>
+            </div>
+
+            <div class="grid-33">
+                <label for="removename">Remove Calls Started By:</label>
+                <select name="removename" id="select-remove">
+                    <option disabled selected>Remove Calls Containing Contact</option>
+                </select>
+            </div>
+
+            <div class="grid-33">
+                <label for="year-select">Remove Specific Year</label>
+                <input type="number" min="2003" max="2099" step="1" value="2021" name="year-select" id="year-selector">
+            </div>
+            <div class="clear"></div>
+
+            <div class="grid-33 form-buttons">
+                <label for="reset-table">Reset</label>
+                <button name="reset-table" value="Reset" type="button" id="reset-table"><i class="fas fa-undo"></i></button>
+            </div>
+            <div class="grid-33 form-buttons">
+                <label for="export">Export to PDF</label>
+                <button type="button" value="Export PDF" id="export-skype-pdf" name="export">Export PDF</button>
+            </div>
+            <div class="grid-33 form-buttons">
+                <label for="intro">Introduction</label>
+                <button type="button" value="Download Introduction" name="intro" id="download-intro">Download Intro</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="grid-90 prefix-5 mobile-grid-90">
+        <div id="contacts-hidden"></div>
+        <table id="skype-table">
+            <thead id="skype-table-head">
+                <tr>
+                    <th><i class="fas fa-calendar-alt"></i> Call Date</th>
+                    <th><i class="fas fa-hourglass-start"></i> Duration</i></th>
+                    <th><i class="fas fa-user-friends"></i> Participants</th>
+                    <th>Call Started By</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="/assets/js/upload.js"></script>
+<script src="/assets/js/display_results.js"></script>
+<script src="/assets/js/filter_results.js"></script>
+<script src="/assets/js/introduction.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="https://unpkg.com/jspdf-autotable@3.5.22/dist/jspdf.plugin.autotable.js"></script>
+<script>
+document.getElementById('export-skype-pdf').addEventListener('click', function () {
+    let date = new Date(),
+        dd = String(date.getDate()).padStart(2, '0'),
+        mm = String(date.getMonth() + 1).padStart(2, '0'),
+        yyyy = date.getFullYear(),
+        fileName = 'skype_export_' + dd + mm + yyyy + '.pdf'
+
+    const doc = new jsPDF(),
+        header = function (data) {
+            doc.text('UKVI Immigration Evidence Support', data.settings.margin.left, 20)
+        }
+
+    doc.autoTable({
+        html: '#skype-table',
+        theme: 'grid',
+        useCss: true,
+        pageBreak: 'auto',
+        didDrawPage: header,
+        margin: {top: 30},
+       // startY: 300,
+    })
+    doc.save(fileName)
+})
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.4/pdfmake.min.js" integrity="sha512-vCaf5rysVLu1/zVMefJew+IjqlQibggltPWqeo96XsdyJ4ihR3eEDV1oU60afiRXTGf8DqKUjLs2Q99HCbnjAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>

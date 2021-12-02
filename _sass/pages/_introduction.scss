@@ -1,0 +1,21 @@
+#introduction-for-pdf {
+    text-align: justify;
+
+    #letter-head {
+        display: flex;
+    }
+
+    #company-logo {
+        padding-right: 0;
+        margin-right: 0;
+    }
+
+    #company-tagline {
+        font-style: italic;
+        text-align: left;
+        padding-left: 0;
+        margin-left: 0;
+        padding-top: 0.5rem;
+        color: grey
+    }
+}

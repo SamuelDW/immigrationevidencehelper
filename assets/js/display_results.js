@@ -6,12 +6,14 @@ function displayResultsAsTable(callArray, table) {
     callArray.forEach(call => {
         let row = '<tr><td>' + call.date.toLocaleDateString('en-GB') + '</td>'
             + '<td class="'+ SKYPE_CALL_DURATION +'">' + secondsToHms(call.duration) + '</td>'
-            + '<td>' + call.participentOne + ', <br>' + call.participentTwo + '</td>'
-            + '<td>' + call.whoStartedCall + '</td></tr>'
+            + '<td style="display:inline-grid;">' + '<span>' + call.participentOne + '</span><br><span>' + call.participentTwo + '</span></td>'
+            + '<td>' + call.whoStartedCall + '</td>'
+            + '<td>' + '<input type="checkbox" class="table-remove-row-checkbox">' + '</td></tr>'
 
         let newRow = tableBody.insertRow(tableBody.rows.length)
         newRow.innerHTML = row
     })
+    document.getElementById('skype-display-table').classList.remove('hidden')
     console.timeEnd('test')
 }
 
@@ -26,4 +28,19 @@ function secondsToHms(duration) {
         secondsDisplay = seconds > 0 ? seconds + 's ' : ""
 
     return hourDisplay + minuteDisplay + secondsDisplay
+}
+
+function populateCallRemoval(contactList, selectBox) {
+    let removeBox = document.getElementById(selectBox)
+    contactList.forEach(contact => {
+        let optionRow = document.createElement('option')
+            optionRow.value = contact
+            optionRow.innerHTML = contact
+        removeBox.appendChild(optionRow)
+    })
+}
+
+function populateHiddenField(array, fieldId) {
+    let hiddenElement = document.getElementById(fieldId)
+    hiddenElement.value = array
 }

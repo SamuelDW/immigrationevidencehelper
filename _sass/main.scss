@@ -1,3 +1,13 @@
+@import 'abstracts/variables';
+
 @import 'vendors/unsemantic-grid-responsive-tablet.scss';
 
+@import 'base/universal';
+
 @import 'pages/skype-call';
+@import 'pages/404';
+@import 'pages/introduction';
+
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/forms';
