@@ -22,8 +22,8 @@ title: UKVI Immigration Heloer
 email: samueldurw@outlook.com
 description: >- # this means to ignore newlines until "baseurl:"
   Convert your file into something readable by a human
-baseurl: "https://samueldw.github.io/immigrationevidencehelper/" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "immigrationevidencehelper/" # the subpath of your site, e.g. /blog
+url: "https://samueldw.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: SamuelDW
 github_username:  samueldw
 
